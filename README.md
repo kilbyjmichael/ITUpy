@@ -1,3 +1,3 @@
-#ITUpy
+ITUpy
 ==========
 Plays ITU code sounds
