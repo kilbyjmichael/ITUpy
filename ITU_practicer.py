@@ -76,6 +76,7 @@ def make_2_char():
 
 def main():
     times = raw_input("Enter practice rounds -> ")
+    score = 0
     for x in range(int(times)):
         chrs = make_1_char()
         print "LISTEN!"
@@ -90,7 +91,9 @@ def main():
         else:
             print "Correct, good job dude."
             print "Listen again"
+            score += 1
             time.sleep(.5)
             zero_to_beep(convert_beeps(chrs))
+    print "You got " + str(score) + " out of " + str(times) + " rounds."
     
 if __name__ == "__main__": main()
