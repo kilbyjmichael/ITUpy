@@ -1,12 +1,14 @@
 #!/usr/bin/python
 
 import winsound as wsnd
-
-message = raw_input("Enter your plaintext (lowercase and numbers) -> ")
+import random
+import time
 
 morse_short = 300
 morse_long = 700
 morse_freq = 400
+
+alphabet = list("abcdefghijklmnopqrstuvwxyz")
 
 ITU_code ={ # 0 = short, 1 = long
         'a' : '01',
@@ -47,7 +49,7 @@ ITU_code ={ # 0 = short, 1 = long
         '9' : '11110',
         '0' : '11111'}
 
-def convert_beeps():
+def convert_beeps(message):
     ITU_message = ""
     for char in message:
         ITU_message += ITU_code[char.lower()]
@@ -63,8 +65,32 @@ def zero_to_beep(itu_msg):
             print "you broke me"
     return "done"
 
-def main():
-    zero_to_beep(convert_beeps())
-    
+def make_1_char():
+    return random.choice(alphabet)
 
+def make_2_char():
+    chr2 = ''
+    for x in range(2):
+        chr2 += random.choice(alphabet)
+    return chr2
+
+def main():
+    times = raw_input("Enter practice rounds -> ")
+    for x in range(int(times)):
+        chrs = make_1_char()
+        print "LISTEN!"
+        time.sleep(1)
+        zero_to_beep(convert_beeps(chrs))
+        hear = raw_input("What did you hear? -> ")
+        if hear != chrs:
+            print "WRONG! it was " + chrs
+            print "Listen again"
+            time.sleep(.5)
+            zero_to_beep(convert_beeps(chrs))
+        else:
+            print "Correct, good job dude."
+            print "Listen again"
+            time.sleep(.5)
+            zero_to_beep(convert_beeps(chrs))
+    
 if __name__ == "__main__": main()
